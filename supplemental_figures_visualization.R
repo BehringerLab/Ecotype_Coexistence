@@ -101,6 +101,36 @@ dataset_2 %>%
         axis.title.y = element_text(face = "bold", size = 20),
         strip.text.x = element_text(size = 18))
 
+## below is the code using the "lm' function used in the geom_smooth linear modeling in the plot above
+## to collect intercept values for each mutant in each transfer condition
+dataset_2_overproducer_2day <- dataset_2 %>%
+  dplyr::filter(!(time %in% seq(0,28,2))) %>%
+  dplyr::filter(cycle %in% c(2)) %>%
+  dplyr::filter(eco %in% c("op")) %>%
+  dplyr::select(c("r_dep", "relfreq"))
+lm(relfreq ~ r_dep, data = dataset_2_overproducer_2day)
+
+dataset_2_auxotroph_2day <- dataset_2 %>%
+  dplyr::filter(!(time %in% seq(0,28,2))) %>%
+  dplyr::filter(cycle %in% c(2)) %>%
+  dplyr::filter(eco %in% c("aux")) %>%
+  dplyr::select(c("r_dep", "relfreq"))
+lm(relfreq ~ r_dep, data = dataset_2_auxotroph_2day)
+
+dataset_2_overproducer_10day <- dataset_2 %>%
+  dplyr::filter(!(time %in% seq(0,28,2))) %>%
+  dplyr::filter(cycle %in% c(10)) %>%
+  dplyr::filter(eco %in% c("op")) %>%
+  dplyr::select(c("r_dep", "relfreq"))
+lm(relfreq ~ r_dep, data = dataset_2_overproducer_10day)
+
+dataset_2_auxotroph_10day <- dataset_2 %>%
+  dplyr::filter(!(time %in% seq(0,28,2))) %>%
+  dplyr::filter(cycle %in% c(10)) %>%
+  dplyr::filter(eco %in% c("aux")) %>%
+  dplyr::select(c("r_dep", "relfreq"))
+lm(relfreq ~ r_dep, data = dataset_2_auxotroph_10day)
+
 ## to generate figure S4. Blank row and one errant evaporated row were filtered from this data set.
 dataset_S1 <- read.csv("dataset_S1.csv")
 
